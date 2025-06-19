@@ -17,7 +17,6 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       selectedIndex = index;
     });
-    print('Tapped index: $index');
   }
 
   @override
