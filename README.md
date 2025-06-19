@@ -10,6 +10,9 @@ A customizable, animated bottom navigation bar for Flutter. This widget supports
 - Responsive layout — works with any number of items.
 - Easy to integrate and lightweight.
 
+![Demo Screenshot](example\imlp1.jpg)
+![Demo Screenshot](example\impl0.jpg)
+
 ## Getting started
 
 Add the following to your `pubspec.yaml`:
@@ -21,8 +24,7 @@ dependencies:
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Detailed example in example/lib/example.dart
 
 ```dart
 IconAnimationBottomBar(
