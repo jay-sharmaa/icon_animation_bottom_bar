@@ -29,12 +29,19 @@ class _MyAppState extends State<MyApp> {
           items: [
             BottomBarItem(icon: Icons.home, label: 'Home'),
             BottomBarItem(icon: Icons.email, label: 'Search'),
-            BottomBarItem(icon: Icons.settings, label: 'Alarm'),
-            BottomBarItem(icon: Icons.abc, label: 'Fax'),
+            BottomBarItem(icon: Icons.alarm, label: 'Alarm'),
+            BottomBarItem(icon: Icons.person, label: 'Person'),
           ],
           selectedIndex: selectedIndex,
           onTap: _onTabTapped,
-          floatingWidget: Icon(Icons.abc)
+          floatingWidget: Image.asset('assets/example.jpg', scale: 12,), 
+          iconSelectedColor: Colors.blueAccent,
+          iconColor: Colors.black,
+          textSelectedColor: Colors.blue,
+          textColor: Colors.black,
+          verticalPadding: 6,
+          bottomBarHeight: 84,
+          alignParameter: 15,
         ),
       ),
     );
