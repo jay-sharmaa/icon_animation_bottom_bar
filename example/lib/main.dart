@@ -27,20 +27,19 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: IconAnimationBottomBar(
           items: [
             BottomBarItem(icon: Icons.home, label: 'Home'),
-            BottomBarItem(icon: Icons.email, label: 'Search'),
-            BottomBarItem(icon: Icons.alarm, label: 'Alarm'),
+            BottomBarItem(icon: Icons.explore, label: 'Explore'),
             BottomBarItem(icon: Icons.person, label: 'Person'),
           ],
           selectedIndex: selectedIndex,
           onTap: _onTabTapped,
-          floatingWidget: Image.asset('assets/example.jpg', scale: 12,), 
+          floatingWidget: Image.asset('assets/example.jpg', scale: 12),
           iconSelectedColor: Colors.blueAccent,
           iconColor: Colors.black,
           textSelectedColor: Colors.blue,
           textColor: Colors.black,
           verticalPadding: 6,
           bottomBarHeight: 84,
-          alignParameter: 15,
+          alignParameter: 50,
         ),
       ),
     );
