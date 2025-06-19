@@ -11,15 +11,38 @@ class IconAnimationBottomBar extends StatefulWidget {
   final List<BottomBarItem> items;
   final int selectedIndex;
   final void Function(int) onTap;
-
-  final Widget? floatingWidget;
+  final Widget floatingWidget;
+  final Color iconSelectedColor;
+  final Color iconColor;
+  final Color textSelectedColor;
+  final Color textColor;
+  final Color backGroundColor;
+  final int duration;
+  final Curve curve;
+  final double textSize;
+  final double iconSize;
+  final double verticalPadding;
+  final double bottomBarHeight;
+  final double alignParameter;
 
   const IconAnimationBottomBar({
     super.key,
     required this.items,
     required this.selectedIndex,
     required this.onTap,
-    this.floatingWidget,
+    required this.floatingWidget, 
+    this.iconSelectedColor = Colors.blue, 
+    this.iconColor = Colors.black, 
+    this.textSelectedColor = Colors.blue, 
+    this.textColor = Colors.black,
+    this.backGroundColor = Colors.white,
+    this.duration = 300,
+    this.curve = Curves.easeInOut,
+    this.textSize = 24,
+    this.iconSize = 24,
+    this.verticalPadding = 8,
+    this.bottomBarHeight = 80,
+    this.alignParameter = 15
   });
 
   @override
@@ -39,12 +62,12 @@ class _IconAnimationBottomBarState extends State<IconAnimationBottomBar>
     _floatingPosition = widget.selectedIndex.toDouble();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: widget.duration),
     );
     _animation = Tween<double>(
       begin: _floatingPosition,
       end: _floatingPosition,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
   }
 
   @override
@@ -59,7 +82,7 @@ class _IconAnimationBottomBarState extends State<IconAnimationBottomBar>
     _animation = Tween<double>(
       begin: _floatingPosition,
       end: newPosition,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut))
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve))
       ..addListener(() => setState(() {}));
     _controller.forward(from: 0);
     _floatingPosition = newPosition;
@@ -74,17 +97,16 @@ class _IconAnimationBottomBarState extends State<IconAnimationBottomBar>
   @override
   Widget build(BuildContext context) {
     double itemWidth = MediaQuery.of(context).size.width / widget.items.length;
-
     return SizedBox(
-      height: 80,
+      height: widget.bottomBarHeight,
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: widget.verticalPadding),
+              decoration: BoxDecoration(
+                color: widget.backGroundColor,
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
               ),
               child: Row(
@@ -100,14 +122,14 @@ class _IconAnimationBottomBarState extends State<IconAnimationBottomBar>
                       children: [
                         Icon(
                           item.icon,
-                          size: 24,
-                          color: isSelected ? Colors.blue : Colors.grey,
+                          size: widget.iconSize,
+                          color: isSelected ? widget.iconSelectedColor : widget.iconColor,
                         ),
                         Text(
                           item.label,
                           style: TextStyle(
-                            fontSize: 12,
-                            color: isSelected ? Colors.blue : Colors.grey,
+                            fontSize: widget.textSize,
+                            color: isSelected ? widget.textSelectedColor : widget.textColor,
                           ),
                         ),
                       ],
@@ -117,12 +139,10 @@ class _IconAnimationBottomBarState extends State<IconAnimationBottomBar>
               ),
             ),
           ),
-
-          if (widget.floatingWidget != null)
             Positioned(
               top: 5,
-              left: _animation.value * itemWidth + itemWidth / 2 - 15,
-              child: widget.floatingWidget!,
+              left: _animation.value * itemWidth + itemWidth / 2 - widget.alignParameter,
+              child: widget.floatingWidget,
             ),
         ],
       ),

@@ -1,3 +1,4 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+- Added IconAnimationBottomBar widget
+- Customizable icon, text, animation, and floating widget
